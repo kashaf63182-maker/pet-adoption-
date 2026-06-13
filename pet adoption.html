@@ -1,0 +1,970 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Pet Adoption Website</title>
+
+
+    <style>
+
+        /* ========== GLOBAL ========== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background: #f5f7fa;
+            color: #333;
+        }
+
+
+        /* ========== NAVBAR ========== */
+
+        nav {
+            background: #2196f3;
+            padding: 18px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            cursor: pointer;
+        }
+
+
+
+        /* ========== SECTIONS ========== */
+
+
+        section {
+            padding: 60px 8%;
+            display: none;
+        }
+
+
+        .active {
+            display: block;
+        }
+
+
+
+        /* ========== HOME ========== */
+
+
+        #home {
+            display: block;
+        }
+
+
+        .hero {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient( rgba(0,0,0,.5), rgba(0,0,0,.5) ), url( "https://images.unsplash.com/photo-1450778869180-41d0601e046e" );
+            background-size: cover;
+            background-position: center;
+            color: white;
+        }
+
+
+            .hero h1 {
+                font-size: 50px;
+            }
+
+
+            .hero p {
+                margin: 20px;
+                font-size: 20px;
+            }
+
+
+        button {
+            background: #ff9800;
+            border: none;
+            padding: 12px 25px;
+            color: white;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: .3s;
+        }
+
+
+            button:hover {
+                transform: scale(1.05);
+            }
+
+
+
+        /* ========== PETS ========== */
+
+
+        .title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+
+        .search {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+
+            .search input {
+                padding: 12px;
+                width: 300px;
+                border-radius: 20px;
+                border: 1px solid #ccc;
+            }
+
+
+        .pet-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+            gap: 25px;
+        }
+
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,.2);
+        }
+
+
+            .card img {
+                width: 100%;
+                height: 220px;
+                object-fit: cover;
+            }
+
+
+        .card-content {
+            padding: 20px;
+        }
+
+
+            .card-content h3 {
+                margin-bottom: 10px;
+            }
+
+
+
+        /* ========== DETAILS ========== */
+
+
+        .details-box {
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            max-width: 600px;
+            margin: auto;
+            box-shadow: 0 5px 15px #aaa;
+        }
+
+
+            .details-box img {
+                width: 100%;
+                border-radius: 20px;
+            }
+
+
+
+        /* ========== FORM ========== */
+
+
+        .form-box {
+            background: white;
+            padding: 30px;
+            max-width: 450px;
+            margin: auto;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px #aaa;
+        }
+
+
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+        }
+
+
+
+        /* ========== FOOTER ========== */
+
+        footer {
+            background: #222;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+
+
+        /* ========== RESPONSIVE ========== */
+
+
+        @media(max-width:600px) {
+
+
+            nav {
+                flex-direction: column;
+            }
+
+
+                nav a {
+                    display: block;
+                    margin: 10px;
+                }
+
+
+            .hero h1 {
+                font-size: 35px;
+            }
+
+
+            .search input {
+                width: 100%;
+            }
+        }
+    </style>
+
+</head>
+
+
+
+<body>
+
+
+
+    <!-- NAVIGATION -->
+
+
+    <nav>
+
+        <div class="logo">
+
+            🐾 AdoptMe
+
+        </div>
+
+
+        <div>
+
+            <a onclick="showPage('home')">
+                Home
+            </a>
+
+
+            <a onclick="showPage('pets')">
+                Browse Pets
+            </a>
+
+
+        </div>
+
+
+    </nav>
+
+
+
+
+    <!-- HOME PAGE -->
+
+
+    <section id="home">
+
+
+        <div class="hero">
+
+
+            <div>
+
+
+                <h1>
+
+                    Find Your Perfect Pet
+
+                </h1>
+
+
+                <p>
+
+                    Give homeless animals a loving family
+
+                </p>
+
+
+                <button onclick="showPage('pets')">
+
+                    Browse Pets
+
+                </button>
+
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+
+
+
+    <!-- BROWSE PETS PAGE -->
+
+
+    <section id="pets">
+
+
+        <h1 class="title">
+
+            Available Pets
+
+        </h1>
+
+
+
+        <div class="search">
+
+
+            <input id="searchInput"
+                   placeholder="Search pets..."
+                   onkeyup="displayPets()">
+
+
+        </div>
+
+
+
+        <div class="pet-grid"
+             id="petContainer">
+
+
+        </div>
+
+
+
+    </section>
+
+
+
+
+
+
+    <!-- PET DETAILS PAGE -->
+
+
+    <section id="details">
+
+
+        <div class="details-box"
+             id="detailsBox">
+
+
+        </div>
+
+
+
+    </section>
+
+
+
+
+
+
+
+    <!-- ADOPTION FORM PAGE -->
+
+
+    <section id="adoption">
+
+
+        <div class="form-box">
+
+
+            <h2>
+
+                Adoption Form
+
+            </h2>
+
+
+
+            <input id="username"
+                   placeholder="Full Name">
+
+
+
+            <input id="email"
+                   placeholder="Email">
+
+
+
+            <input id="phone"
+                   placeholder="Phone Number">
+
+
+
+<textarea id="address"
+          placeholder="Address">
+
+</textarea>
+
+
+
+            <button onclick="submitRequest()">
+
+                Submit Adoption
+
+            </button>
+
+
+
+        </div>
+
+
+
+    </section>
+
+
+
+
+
+    <footer>
+
+        © 2026 Pet Adoption Website
+
+    </footer>
+
+
+
+
+
+
+
+    <!-- SUPABASE CDN -->
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+
+
+
+
+    <script>
+
+
+        /* ========== SUPABASE CONNECTION ========== */
+
+
+        const SUPABASE_URL =
+            "https://txibqxlycuorxyhzeuvn.supabase.co";
+
+
+        const SUPABASE_KEY =
+            "sb_publishable_O1c3xGhVOWJEn2DwRb5-lg_mUwsRvKK";
+
+
+
+        const supabaseClient =
+
+            supabase.createClient(
+
+                SUPABASE_URL,
+
+                SUPABASE_KEY
+
+            );
+
+
+
+
+
+        /* ========== PET DATA ========== */
+
+
+        /*
+        If Supabase has data,
+        replace this array with database fetch.
+        */
+
+
+        let pets = [
+
+
+            {
+
+                id: 1,
+
+                name: "Bruno",
+
+                species: "Dog",
+
+                breed: "Labrador",
+
+                age: 2,
+
+                description:
+
+                    "Friendly and active dog looking for a home.",
+
+
+                image:
+
+                    "https://images.unsplash.com/photo-1552053831-71594a27632d"
+
+            },
+
+
+
+            {
+
+                id: 2,
+
+                name: "Kitty",
+
+                species: "Cat",
+
+                breed: "Persian",
+
+                age: 1,
+
+
+                description:
+
+                    "Beautiful Persian cat, calm and playful.",
+
+
+                image:
+
+                    "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba"
+
+            },
+
+
+
+            {
+
+                id: 3,
+
+                name: "Rio",
+
+                species: "Bird",
+
+                breed: "Parrot",
+
+                age: 3,
+
+
+                description:
+
+                    "Smart colorful parrot.",
+
+
+                image:
+
+                    "https://images.unsplash.com/photo-1552728089-57bdde30beb3"
+
+            }
+
+
+        ];
+
+
+
+        let selectedPet = null;
+
+
+
+
+        /* ========== PAGE SWITCH ========== */
+
+
+
+        function showPage(id) {
+
+
+            document
+
+                .querySelectorAll("section")
+
+                .forEach(
+
+                    s => s.style.display = "none"
+
+                );
+
+
+
+            document
+
+                .getElementById(id)
+
+                .style.display = "block";
+
+
+        }
+
+
+
+
+
+
+
+        /* ========== DISPLAY PETS ========== */
+
+
+
+        function displayPets() {
+
+
+            let container =
+
+                document.getElementById(
+                    "petContainer"
+                );
+
+
+
+            let search =
+
+                document.getElementById(
+                    "searchInput"
+                )
+
+                    .value
+
+                    .toLowerCase();
+
+
+
+            container.innerHTML = "";
+
+
+
+            pets
+
+
+                .filter(p =>
+
+                    p.name.toLowerCase().includes(search)
+
+                    ||
+
+                    p.species.toLowerCase().includes(search)
+
+                )
+
+
+
+                .forEach(p => {
+
+
+
+                    container.innerHTML += `
+
+
+<div class="card">
+
+
+<img src="${p.image}">
+
+
+<div class="card-content">
+
+
+<h3>${p.name}</h3>
+
+
+<p>
+
+${p.species} |
+${p.breed}
+
+</p>
+
+
+
+<br>
+
+
+<button onclick="showDetails(${p.id})">
+
+View Details
+
+</button>
+
+
+</div>
+
+
+</div>
+
+
+`;
+
+
+                });
+
+
+        }
+
+
+
+        displayPets();
+
+
+
+
+
+
+
+        /* ========== PET DETAILS ========== */
+
+
+
+        function showDetails(id) {
+
+
+            selectedPet =
+
+                pets.find(
+
+                    p => p.id === id
+
+                );
+
+
+
+            document
+
+                .getElementById(
+                    "detailsBox"
+                )
+
+                .innerHTML = `
+
+<img src="${selectedPet.image}">
+
+
+<h2>
+
+${selectedPet.name}
+
+</h2>
+
+
+<p>
+
+Breed:
+${selectedPet.breed}
+
+</p>
+
+
+<p>
+
+Age:
+${selectedPet.age}
+
+</p>
+
+
+<p>
+
+${selectedPet.description}
+
+</p>
+
+
+<br>
+
+
+<button onclick="showPage('adoption')">
+
+Adopt Now
+
+</button>
+
+
+`;
+
+
+
+            showPage("details");
+
+
+        }
+
+
+
+
+
+
+
+        /* ========== ADOPTION SUBMIT ========== */
+
+
+
+        async function submitRequest() {
+
+
+
+            let name =
+
+                document.getElementById(
+                    "username"
+                ).value;
+
+
+
+            let email =
+
+                document.getElementById(
+                    "email"
+                ).value;
+
+
+
+            let phone =
+
+                document.getElementById(
+                    "phone"
+                ).value;
+
+
+
+            let address =
+
+                document.getElementById(
+                    "address"
+                ).value;
+
+
+
+
+            const { error } =
+
+
+                await supabaseClient
+
+
+                    .from(
+                        "adoption_requests"
+                    )
+
+
+                    .insert([
+
+
+                        {
+
+
+                            pet_id:
+
+                                selectedPet.id,
+
+
+                            adopter_name: name,
+
+
+                            email: email,
+
+
+                            phone: phone,
+
+
+                            address: address,
+
+
+                            status: "Pending"
+
+
+                        }
+
+
+                    ]);
+
+
+
+
+
+
+            if (error) {
+
+
+                console.log(error);
+
+
+                alert(
+                    "Database Error"
+                );
+
+
+            }
+
+
+
+            else {
+
+
+                alert(
+
+                    "Adoption Request Submitted Successfully 🐾"
+
+                );
+
+
+
+                showPage("home");
+
+
+            }
+
+
+
+        }
+
+
+
+    </script>
+
+
+</body>
+
+
+</html>
